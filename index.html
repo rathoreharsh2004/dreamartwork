@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dream Artwork Studio — Art Beyond Imagination</title>
+<meta name="description" content="Dream Artwork Studio — custom portraits, wall murals and canvas artwork. Ahmedabad & Rajasthan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#17120f; --cream:#f6f0e7; --paper:#fffaf3; --gold:#c79b55;
+  --rust:#8f4b35; --muted:#74685e; --line:rgba(23,18,15,.13);
+  --shadow:0 24px 70px rgba(30,18,10,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"DM Sans",sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+button,input,textarea{font:inherit}
+::selection{background:var(--gold);color:#fff}
+.container{width:min(1180px,calc(100% - 40px));margin:auto}
+.reveal{opacity:0;transform:translateY(35px);transition:opacity .8s ease,transform .8s ease}
+.reveal.show{opacity:1;transform:none}
+.eyebrow{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--rust);font-weight:700}
+.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:48px}
+.section-head h2{font-family:"Cormorant Garamond",serif;font-size:clamp(2.7rem,6vw,5rem);font-weight:500;line-height:.9}
+.section-head p{max-width:420px;color:var(--muted);line-height:1.8}
+
+/* NAV */
+.nav{position:absolute;top:0;left:0;width:100%;z-index:20;padding:22px 0;color:#fff}
+.nav-inner{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.08em}
+.brand img{width:46px;height:46px;border-radius:50%;object-fit:cover;background:#fff}
+.brand span{font-size:.78rem}
+.nav-links{display:flex;gap:28px;font-size:.82rem}
+.nav-links a{opacity:.9;transition:.25s}
+.nav-links a:hover{color:#f2c777}
+.menu-btn{display:none;border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;padding:10px 14px;border-radius:999px}
+
+/* HERO */
+.hero{min-height:100svh;position:relative;color:#fff;display:grid;place-items:center;overflow:hidden;background:#1b1613}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;animation:heroZoom 14s ease-in-out infinite alternate}
+.hero-bg:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,8,6,.82),rgba(12,8,6,.38),rgba(12,8,6,.58))}
+@keyframes heroZoom{from{transform:scale(1)}to{transform:scale(1.07)}}
+.hero-content{position:relative;z-index:2;width:min(1000px,calc(100% - 40px));margin-top:60px}
+.hero-kicker{letter-spacing:.3em;text-transform:uppercase;font-size:.75rem;color:#e9c987;margin-bottom:22px}
+.hero h1{font-family:"Cormorant Garamond",serif;font-size:clamp(4rem,9vw,8.6rem);line-height:.8;font-weight:500;max-width:900px}
+.hero h1 em{font-style:italic;color:#e9c987}
+.hero-copy{margin-top:28px;max-width:560px;line-height:1.8;color:rgba(255,255,255,.82)}
+.hero-actions{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 22px;border-radius:999px;border:1px solid rgba(255,255,255,.28);font-size:.8rem;font-weight:700;transition:transform .25s,background .25s}
+.btn.primary{background:#e1b66a;color:#211710;border-color:#e1b66a}
+.btn.ghost:hover{background:rgba(255,255,255,.1)}
+.hero-meta{position:absolute;z-index:2;bottom:28px;left:50%;transform:translateX(-50%);width:min(1180px,calc(100% - 40px));display:flex;justify-content:space-between;color:rgba(255,255,255,.7);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase}
+.scroll-line{display:flex;align-items:center;gap:10px}.scroll-line:before{content:"";height:1px;width:50px;background:#e1b66a}
+
+/* INTRO */
+.intro{padding:120px 0;background:var(--cream)}
+.intro-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:center}
+.intro-image{height:600px;overflow:hidden;position:relative}
+.intro-image img{width:100%;height:100%;object-fit:cover}
+.intro-image:after{content:"DAS";position:absolute;right:-18px;bottom:15px;font-family:"Cormorant Garamond";font-size:8rem;color:rgba(255,255,255,.12);font-weight:700}
+.intro h2{font-family:"Cormorant Garamond";font-size:clamp(3rem,6vw,6rem);line-height:.9;font-weight:500;margin:15px 0 28px}
+.intro h2 em{color:var(--rust)}
+.intro p{color:var(--muted);line-height:1.9;max-width:570px}
+.signature{margin-top:35px;font-family:"Cormorant Garamond";font-style:italic;font-size:2rem;color:var(--rust)}
+
+/* SERVICES */
+.services{padding:120px 0}
+.service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.service{background:var(--paper);padding:38px 28px;min-height:270px;transition:.35s}
+.service:hover{background:#f1e6d7;transform:translateY(-5px)}
+.service-num{font-family:"Cormorant Garamond";font-size:1.4rem;color:var(--gold)}
+.service h3{font-family:"Cormorant Garamond";font-size:2rem;font-weight:500;margin:70px 0 12px}
+.service p{color:var(--muted);font-size:.88rem;line-height:1.7}
+
+/* PORTFOLIO */
+.portfolio{padding:120px 0;background:#1a1411;color:#fff}
+.portfolio .eyebrow{color:#e2b766}
+.portfolio .section-head p{color:#b9aea5}
+.masonry{display:grid;grid-template-columns:1.15fr .85fr 1fr;grid-auto-rows:250px;gap:14px}
+.work{position:relative;overflow:hidden;background:#2b211b}
+.work img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
+.work:hover img{transform:scale(1.06)}
+.work:nth-child(1){grid-row:span 2}
+.work:nth-child(4){grid-row:span 2}
+.work:nth-child(5){grid-column:span 2}
+.work-overlay{position:absolute;inset:auto 0 0;padding:22px;background:linear-gradient(transparent,rgba(0,0,0,.75));transform:translateY(10px);transition:.3s}
+.work:hover .work-overlay{transform:none}
+.work-overlay h3{font-family:"Cormorant Garamond";font-size:1.8rem;font-weight:500}
+.work-overlay span{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#e5bd70}
+
+/* PROCESS */
+.process{padding:120px 0;background:var(--cream)}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:25px}
+.step{border-top:1px solid var(--ink);padding-top:22px}
+.step b{font-size:.72rem;color:var(--rust);letter-spacing:.15em}
+.step h3{font-family:"Cormorant Garamond";font-size:2.2rem;font-weight:500;margin:35px 0 10px}
+.step p{color:var(--muted);line-height:1.75;font-size:.9rem}
+
+/* REVIEWS */
+.reviews{padding:120px 0}
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.review{padding:35px;background:#f5eee5;border:1px solid var(--line)}
+.stars{color:#b77b2e;letter-spacing:.15em;margin-bottom:22px}
+.review p{font-family:"Cormorant Garamond";font-size:1.55rem;line-height:1.25}
+.review small{display:block;color:var(--muted);margin-top:25px}
+
+/* FAQ */
+.faq{padding:120px 0;background:#efe5d8}
+.faq-wrap{max-width:850px;margin:auto}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;text-align:left;border:0;background:none;padding:25px 0;cursor:pointer;font-family:"Cormorant Garamond";font-size:1.65rem;color:var(--ink)}
+.faq-q span{font-family:"DM Sans";font-size:1.4rem;color:var(--rust);transition:.3s}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .45s ease;color:var(--muted);line-height:1.8}
+.faq-a p{padding:0 40px 25px 0}
+.faq-item.open .faq-a{max-height:200px}.faq-item.open .faq-q span{transform:rotate(45deg)}
+
+/* CONTACT */
+.contact{padding:120px 0;background:#1a1411;color:#fff}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px}
+.contact h2{font-family:"Cormorant Garamond";font-size:clamp(3.5rem,7vw,6.5rem);font-weight:500;line-height:.85;margin:15px 0 25px}
+.contact h2 em{color:#e2b766}
+.contact p{color:#bdb2aa;line-height:1.8;max-width:470px}
+.contact-list{margin-top:35px;display:grid;gap:12px}
+.contact-list a{display:inline-flex;width:max-content;border-bottom:1px solid rgba(255,255,255,.18);padding-bottom:5px}
+.form{display:grid;gap:14px}
+.form input,.form textarea{width:100%;background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.25);padding:16px 2px;color:#fff;outline:none}
+.form textarea{min-height:130px;resize:vertical}
+.form input::placeholder,.form textarea::placeholder{color:#8f857e}
+.form .btn{width:max-content;border:0;cursor:pointer}
+
+/* MAP */
+.map{height:390px;filter:grayscale(.85) sepia(.15)}
+.map iframe{width:100%;height:100%;border:0}
+
+/* FOOTER */
+footer{background:#0f0c0a;color:#aaa;padding:30px 0}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center;font-size:.76rem}
+.footer-social{display:flex;gap:20px}.footer-social a:hover{color:#e2b766}
+
+/* FLOATING WHATSAPP */
+.wa{position:fixed;right:22px;bottom:22px;width:62px;height:62px;border-radius:50%;background:#20b85a;color:#fff;display:grid;place-items:center;z-index:50;box-shadow:0 12px 35px rgba(0,0,0,.25);transition:transform .2s}
+.wa:hover{transform:scale(1.1)}
+.wa svg{width:28px;height:28px;fill:currentColor}
+.magnetic{will-change:transform}
+
+/* MOBILE */
+@media(max-width:900px){
+  .nav-links{display:none}.menu-btn{display:block}
+  .intro-grid,.contact-grid{grid-template-columns:1fr;gap:45px}
+  .intro-image{height:480px}
+  .service-grid{grid-template-columns:repeat(2,1fr)}
+  .process-grid{grid-template-columns:repeat(2,1fr)}
+  .review-grid{grid-template-columns:1fr}
+  .masonry{grid-template-columns:1fr 1fr;grid-auto-rows:220px}
+  .work:nth-child(1),.work:nth-child(4){grid-row:span 1}
+  .work:nth-child(5){grid-column:span 2}
+}
+@media(max-width:560px){
+  .container{width:min(100% - 28px,1180px)}
+  .hero h1{font-size:4.1rem}
+  .hero-meta{font-size:.58rem}
+  .hero-meta span:last-child{display:none}
+  .intro,.services,.portfolio,.process,.reviews,.faq,.contact{padding:82px 0}
+  .section-head{display:block;margin-bottom:32px}.section-head p{margin-top:20px}
+  .service-grid,.process-grid{grid-template-columns:1fr}
+  .service{min-height:auto}.service h3{margin-top:45px}
+  .masonry{grid-template-columns:1fr;grid-auto-rows:300px}
+  .work:nth-child(5){grid-column:auto}
+  .footer-inner{flex-direction:column;text-align:center}
+  .brand span{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#home">
+      <img src="logo.png" alt="Dream Artwork Studio logo">
+      <span>DREAM ARTWORK STUDIO</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#about">Studio</a><a href="#services">Services</a><a href="#work">Projects</a>
+      <a href="#reviews">Reviews</a><a href="#contact">Contact</a>
+    </nav>
+    <button class="menu-btn" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open')">Menu</button>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-content reveal">
+    <div class="hero-kicker">Ahmedabad · Rajasthan · India</div>
+    <h1>Art that makes<br><em>spaces speak.</em></h1>
+    <p class="hero-copy">Professional portraits, expressive wall murals and hand-crafted canvas artworks created to make ordinary spaces feel deeply personal.</p>
+    <div class="hero-actions">
+      <a class="btn primary magnetic" href="https://wa.me/919982771900?text=Hello%20Dream%20Artwork%20Studio%2C%20I%20would%20like%20to%20discuss%20a%20custom%20artwork." target="_blank">Start a Project ↗</a>
+      <a class="btn ghost magnetic" href="#work">View Projects ↓</a>
+    </div>
+  </div>
+  <div class="hero-meta">
+    <span class="scroll-line">Scroll to explore</span>
+    <span>Portraits · Wall Mural · Canvas</span>
+  </div>
+</section>
+
+<section class="intro" id="about">
+  <div class="container intro-grid">
+    <div class="intro-image reveal">
+      <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=1200&q=85" alt="Fine art painting">
+    </div>
+    <div class="reveal">
+      <div class="eyebrow">The Studio</div>
+      <h2>Where an idea<br>becomes <em>art.</em></h2>
+      <p>Dream Artwork Studio creates artwork with a strong focus on detail, emotion and the character of the space. From a meaningful portrait to a statement wall mural, every commission is approached as an original piece rather than a template.</p>
+      <p style="margin-top:18px">Perfect for homes, offices, cafés, hospitality spaces, gifts and personal collections.</p>
+      <div class="signature">Dream. Draw. Deliver.</div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <div><div class="eyebrow">What We Create</div><h2>Four ways<br>to make it <em>personal.</em></h2></div>
+      <p>Choose a medium, share your vision, and let the artwork become part of your story.</p>
+    </div>
+    <div class="service-grid">
+      <article class="service reveal"><span class="service-num">01</span><h3>Portraits</h3><p>Custom portraits crafted from your photographs with attention to likeness, expression and fine detailing.</p></article>
+      <article class="service reveal"><span class="service-num">02</span><h3>Wall Murals</h3><p>Large-scale artwork designed around your wall, interiors and desired mood — from subtle to statement-making.</p></article>
+      <article class="service reveal"><span class="service-num">03</span><h3>Canvas Art</h3><p>Original canvas compositions for homes, offices, cafés, bedrooms and premium interior spaces.</p></article>
+      <article class="service reveal"><span class="service-num">04</span><h3>Custom Art</h3><p>Have an idea that doesn't fit a category? Tell us the story and we'll develop a visual direction around it.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="portfolio" id="work">
+  <div class="container">
+    <div class="section-head reveal">
+      <div><div class="eyebrow">Selected Projects</div><h2>Made by<br><em>hand.</em></h2></div>
+      <p>Replace these project slots with your latest Dream Artwork Studio work. The layout automatically adapts for mobile.</p>
+    </div>
+    <div class="masonry">
+      <a class="work reveal" href="#contact"><img src="g1.png" alt="Dream Artwork Studio project 1"><div class="work-overlay"><span>01 · Portrait</span><h3>Personal Story</h3></div></a>
+      <a class="work reveal" href="#contact"><img src="g2.png" alt="Dream Artwork Studio project 2"><div class="work-overlay"><span>02 · Canvas</span><h3>Expressive Canvas</h3></div></a>
+      <a class="work reveal" href="#contact"><img src="g3.png" alt="Dream Artwork Studio project 3"><div class="work-overlay"><span>03 · Portrait</span><h3>Character & Emotion</h3></div></a>
+      <a class="work reveal" href="#contact"><img src="g4.png" alt="Dream Artwork Studio project 4"><div class="work-overlay"><span>04 · Mural</span><h3>Wall Story</h3></div></a>
+      <a class="work reveal" href="#contact"><img src="g5.png" alt="Dream Artwork Studio project 5"><div class="work-overlay"><span>05 · Custom Art</span><h3>Made For You</h3></div></a>
+      <a class="work reveal" href="#contact"><img src="g6.png" alt="Dream Artwork Studio project 6"><div class="work-overlay"><span>06 · Canvas</span><h3>Signature Piece</h3></div></a>
+    </div>
+  </div>
+</section>
+
+<section class="process">
+  <div class="container">
+    <div class="section-head reveal">
+      <div><div class="eyebrow">Our Process</div><h2>From thought<br>to <em>masterpiece.</em></h2></div>
+    </div>
+    <div class="process-grid">
+      <article class="step reveal"><b>01 — DISCOVER</b><h3>Your Idea</h3><p>Share your reference, wall, size, theme, story or simply the feeling you want the artwork to create.</p></article>
+      <article class="step reveal"><b>02 — CREATE</b><h3>The Artwork</h3><p>We develop the artwork with careful composition, colour, proportion and hand-finished details.</p></article>
+      <article class="step reveal"><b>03 — REFINE</b><h3>Final Details</h3><p>We review the result and refine the details that make the finished piece feel truly yours.</p></article>
+      <article class="step reveal"><b>04 — DELIVER</b><h3>Make It Live</h3><p>Your artwork is prepared for collection, delivery or installation depending on the project.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="reviews" id="reviews">
+  <div class="container">
+    <div class="section-head reveal">
+      <div><div class="eyebrow">Client Words</div><h2>Art is felt<br>before it is <em>explained.</em></h2></div>
+      <p>Use this section for verified customer reviews from Instagram or Google. The sample copy below is placeholder text.</p>
+    </div>
+    <div class="review-grid">
+      <article class="review reveal"><div class="stars">★★★★★</div><p>“The portrait captured the expression beautifully. The detailing made the final artwork feel incredibly personal.”</p><small>— Custom Portrait Client</small></article>
+      <article class="review reveal"><div class="stars">★★★★★</div><p>“Our wall completely changed after the mural. It became the first thing everyone notices when they enter.”</p><small>— Wall Mural Client</small></article>
+      <article class="review reveal"><div class="stars">★★★★★</div><p>“Professional communication, beautiful finishing and a piece that now has a special place in our home.”</p><small>— Canvas Art Client</small></article>
+    </div>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="container faq-wrap">
+    <div class="section-head reveal">
+      <div><div class="eyebrow">FAQ</div><h2>Before we<br><em>begin.</em></h2></div>
+    </div>
+    <div class="faq-item reveal"><button class="faq-q">Can I order a portrait from a photo? <span>+</span></button><div class="faq-a"><p>Yes. Share a clear reference photo and tell us your preferred style, size and medium. We'll discuss the suitable approach before starting.</p></div></div>
+    <div class="faq-item reveal"><button class="faq-q">Do you create wall murals? <span>+</span></button><div class="faq-a"><p>Yes. Murals can be planned for homes, cafés, offices and other spaces. The final concept can be tailored to the wall dimensions and interior.</p></div></div>
+    <div class="faq-item reveal"><button class="faq-q">Can I request a custom size? <span>+</span></button><div class="faq-a"><p>Absolutely. Canvas and portrait sizes can be discussed according to your wall, frame preference and intended display.</p></div></div>
+    <div class="faq-item reveal"><button class="faq-q">How do I get a quote? <span>+</span></button><div class="faq-a"><p>Send the project type, reference images, approximate size and your city on WhatsApp. You'll receive the next steps for your commission.</p></div></div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container contact-grid">
+    <div class="reveal">
+      <div class="eyebrow">Let's Create</div>
+      <h2>Bring your<br>idea to <em>life.</em></h2>
+      <p>Tell us what you have in mind. A portrait, a wall that needs a story, a canvas for your home — start with a simple message.</p>
+      <div class="contact-list">
+        <a href="tel:+919982771900">+91 99827 71900</a>
+        <a href="https://wa.me/919982771900" target="_blank">WhatsApp ↗</a>
+        <a href="https://www.instagram.com/dream_artwork_studio/" target="_blank">@dream_artwork_studio ↗</a>
+      </div>
+    </div>
+    <form class="form reveal" id="quoteForm">
+      <input id="name" required placeholder="Your name">
+      <input id="project" required placeholder="Portrait / Mural / Canvas / Custom">
+      <input id="size" placeholder="Approx. size (optional)">
+      <textarea id="message" required placeholder="Tell us about your artwork..."></textarea>
+      <button class="btn primary magnetic" type="submit">Send Enquiry on WhatsApp ↗</button>
+    </form>
+  </div>
+</section>
+
+<section class="map" aria-label="Ahmedabad map">
+  <iframe loading="lazy" src="https://www.google.com/maps?q=Ahmedabad%2C%20Gujarat&output=embed" title="Ahmedabad map"></iframe>
+</section>
+
+<footer>
+  <div class="container footer-inner">
+    <div>© 2026 Dream Artwork Studio · All rights reserved.</div>
+    <div class="footer-social">
+      <a href="https://wa.me/919982771900" target="_blank" aria-label="WhatsApp">WhatsApp</a>
+      <a href="https://www.instagram.com/dream_artwork_studio/" target="_blank" aria-label="Instagram">Instagram</a>
+    </div>
+  </div>
+</footer>
+
+<a class="wa magnetic" href="https://wa.me/919982771900?text=Hello%20Dream%20Artwork%20Studio%2C%20I%20want%20to%20discuss%20an%20artwork." target="_blank" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.77 11.77 0 0 0 12.12 0C5.6 0 .3 5.3.3 11.82c0 2.08.54 4.11 1.57 5.9L.2 24l6.43-1.64a11.8 11.8 0 0 0 5.49 1.4h.01c6.52 0 11.82-5.3 11.82-11.82 0-3.16-1.23-6.13-3.43-8.46zM12.13 21.76h-.01a9.9 9.9 0 0 1-5.05-1.38l-.36-.21-3.82.98 1.02-3.72-.23-.38a9.86 9.86 0 0 1-1.51-5.23C2.17 6.38 6.63 1.92 12.13 1.92c2.67 0 5.18 1.04 7.06 2.93a9.93 9.93 0 0 1 2.92 7.07c0 5.49-4.47 9.94-9.98 9.84zm5.45-7.45c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.28-.47-2.44-1.5-.9-.8-1.5-1.78-1.68-2.08-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35z"/></svg>
+</a>
+
+<script>
+const heroImages=[
+  "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=2200&q=90",
+  "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&w=2200&q=90",
+  "https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?auto=format&fit=crop&w=2200&q=90"
+];
+let hi=0;
+const heroBg=document.getElementById("heroBg");
+function setHero(){heroBg.style.backgroundImage=`url("${heroImages[hi]}")`;hi=(hi+1)%heroImages.length}
+setHero(); setInterval(setHero,5500);
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("show")})
+},{threshold:.12});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+
+document.querySelectorAll(".faq-q").forEach(q=>{
+  q.addEventListener("click",()=>q.parentElement.classList.toggle("open"));
+});
+
+document.getElementById("quoteForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const name=document.getElementById("name").value.trim();
+  const project=document.getElementById("project").value.trim();
+  const size=document.getElementById("size").value.trim();
+  const message=document.getElementById("message").value.trim();
+  const text=`Hello Dream Artwork Studio,%0A%0AName: ${encodeURIComponent(name)}%0AProject: ${encodeURIComponent(project)}%0ASize: ${encodeURIComponent(size||"Not specified")}%0A%0ADetails: ${encodeURIComponent(message)}`;
+  window.open(`https://wa.me/919982771900?text=${text}`,"_blank");
+});
+
+document.querySelectorAll(".magnetic").forEach(btn=>{
+  btn.addEventListener("mousemove",e=>{
+    const r=btn.getBoundingClientRect();
+    const x=(e.clientX-r.left-r.width/2)*.16;
+    const y=(e.clientY-r.top-r.height/2)*.16;
+    btn.style.transform=`translate(${x}px,${y}px)`;
+  });
+  btn.addEventListener("mouseleave",()=>btn.style.transform="translate(0,0)");
+});
+
+const mobileStyle=document.createElement("style");
+mobileStyle.textContent=".nav-links.mobile-open{display:flex;position:absolute;top:78px;left:14px;right:14px;flex-direction:column;gap:0;background:rgba(20,14,11,.96);padding:10px 18px;border:1px solid rgba(255,255,255,.15);border-radius:18px}.nav-links.mobile-open a{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08)}";
+document.head.appendChild(mobileStyle);
+</script>
+</body>
+</html>
